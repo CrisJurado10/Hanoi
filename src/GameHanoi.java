@@ -32,7 +32,7 @@ public class GameHanoi extends JFrame {
     private JPanel pivotTower;
     HanoiManager towerManager = new HanoiManager();
 
-    //Functions
+
     public GameHanoi() {
         setContentPane(torrePanel);
 
@@ -117,11 +117,9 @@ public class GameHanoi extends JFrame {
     private void solveGame(){
 
         if(towerManager.getTowerA().size() != towerManager.getDiscCount()){
-            System.out.println(towerManager.getMovesStack());
             resetMoves();
         }
 
-        //!t.getTorreI().isEmpty()
         if(towerManager.getTowerA().size() == towerManager.getDiscCount()){
             hanoiSolver(towerManager.getDiscCount(), "o", "a", "d");
         }
@@ -129,12 +127,12 @@ public class GameHanoi extends JFrame {
     private void moveFromInitialToPivot(){
         if (fPanel.getComponentCount() > 0) {
             try {
-                // Si la torre pivote está vacía, no haremos la comparación.
+
                 if (!towerManager.getTowerB().empty() && towerManager.getTowerB().peek().compareTo(towerManager.getTowerA().peek()) <= 0) {
-                    return; // Si la comparación es inválida, termina el método aquí.
+                    return;
                 }
             } catch (EmptyStackException e) {
-                // No haremos nada aquí, porque si la torre pivote está vacía, queremos continuar con el movimiento.
+
             }
             Component component = fPanel.getComponent(0);
             if (component instanceof JTextField) {
@@ -144,32 +142,30 @@ public class GameHanoi extends JFrame {
 
                 JPanel pivotFieldPanel = (JPanel) pivotTower.getComponent(0);
 
-                // Mueve el JTextField de fieldPanel a pivotFieldPanel
                 fPanel.remove(field);
                 pivotFieldPanel.add(field, 0);
 
                 fPanel.revalidate();
                 fPanel.repaint();
 
-                pivotFieldPanel.revalidate();
-                pivotFieldPanel.repaint();
+                    pivotFieldPanel.revalidate();
+                    pivotFieldPanel.repaint();
 
-                towerManager.setMovesCount(towerManager.getMovesCount()+1);
-                numMovesLabel.setText(String.valueOf(towerManager.getMovesCount()));
+                    towerManager.setMovesCount(towerManager.getMovesCount()+1);
+                    numMovesLabel.setText(String.valueOf(towerManager.getMovesCount()));
 
-                recordMove("IP");
+                    recordMove("IP");
+                }
             }
         }
-    }
-    private void moveFromInitialToDestination(){
-        if (fPanel.getComponentCount() > 0) {
-            try {
-                // Si la torre pivote está vacía, no haremos la comparación.
-                if (!towerManager.getTowerC().empty() && towerManager.getTowerC().peek().compareTo(towerManager.getTowerA().peek()) <= 0) {
-                    return; // Si la comparación es inválida, termina el método aquí.
+        private void moveFromInitialToDestination(){
+            if (fPanel.getComponentCount() > 0) {
+                try {
+                    if (!towerManager.getTowerC().empty() && towerManager.getTowerC().peek().compareTo(towerManager.getTowerA().peek()) <= 0) {
+                        return;
                 }
             } catch (EmptyStackException e) {
-                // No haremos nada aquí, porque si la torre pivote está vacía, queremos continuar con el movimiento.
+
             }
             Component component = fPanel.getComponent(0);
             if (component instanceof JTextField) {
@@ -179,7 +175,6 @@ public class GameHanoi extends JFrame {
 
                 JPanel pivotFieldPanel = (JPanel) destinationTower.getComponent(0);
 
-                // Mueve el JTextField de fieldPanel a pivotFieldPanel
                 fPanel.remove(field);
                 pivotFieldPanel.add(field, 0);
 
@@ -192,19 +187,17 @@ public class GameHanoi extends JFrame {
                 towerManager.setMovesCount(towerManager.getMovesCount()+1);
                 numMovesLabel.setText(String.valueOf(towerManager.getMovesCount()));
 
-                recordMove("ID");
+                recordMove("MOV");
             }
         }
     }
     private void moveFromPivotToInitial(){
         if (sPanel.getComponentCount() > 0) {
             try {
-                // Si la torre pivote está vacía, no haremos la comparación.
                 if (!towerManager.getTowerA().empty() && towerManager.getTowerA().peek().compareTo(towerManager.getTowerB().peek()) <= 0) {
-                    return; // Si la comparación es inválida, termina el método aquí.
+                    return;
                 }
             } catch (EmptyStackException e) {
-                // No haremos nada aquí, porque si la torre pivote está vacía, queremos continuar con el movimiento.
             }
             Component component = sPanel.getComponent(0);
             if (component instanceof JTextField) {
@@ -214,7 +207,6 @@ public class GameHanoi extends JFrame {
 
                 JPanel initialFieldPanel = (JPanel) initialTower.getComponent(0);
 
-                // Mueve el JTextField de fieldPanel2 a initialFieldPanel
                 sPanel.remove(field);
                 initialFieldPanel.add(field, 0);
 
@@ -236,12 +228,10 @@ public class GameHanoi extends JFrame {
     private void moveFromPivotToDestination(){
         if (sPanel.getComponentCount() > 0) {
             try {
-                // Si la torre pivote está vacía, no haremos la comparación.
                 if (!towerManager.getTowerC().empty() && towerManager.getTowerC().peek().compareTo(towerManager.getTowerB().peek()) <= 0) {
-                    return; // Si la comparación es inválida, termina el método aquí.
+                    return;
                 }
             } catch (EmptyStackException e) {
-                // No haremos nada aquí, porque si la torre pivote está vacía, queremos continuar con el movimiento.
             }
             Component component = sPanel.getComponent(0);
             if (component instanceof JTextField) {
@@ -251,7 +241,6 @@ public class GameHanoi extends JFrame {
 
                 JPanel initialFieldPanel = (JPanel) destinationTower.getComponent(0);
 
-                // Mueve el JTextField de fieldPanel2 a initialFieldPanel
                 sPanel.remove(field);
                 initialFieldPanel.add(field, 0);
 
@@ -273,12 +262,10 @@ public class GameHanoi extends JFrame {
     private void moveFromDestinationToInitial(){
         if (tPanel.getComponentCount() > 0) {
             try {
-                // Si la torre pivote está vacía, no haremos la comparación.
                 if (!towerManager.getTowerA().empty() && towerManager.getTowerA().peek().compareTo(towerManager.getTowerC().peek()) <= 0) {
-                    return; // Si la comparación es inválida, termina el método aquí.
+                    return;
                 }
             } catch (EmptyStackException e) {
-                // No haremos nada aquí, porque si la torre pivote está vacía, queremos continuar con el movimiento.
             }
             Component component = tPanel.getComponent(0);
             if (component instanceof JTextField) {
@@ -288,7 +275,6 @@ public class GameHanoi extends JFrame {
 
                 JPanel initialFieldPanel = (JPanel) initialTower.getComponent(0);
 
-                // Mueve el JTextField de fieldPanel2 a initialFieldPanel
                 tPanel.remove(field);
                 initialFieldPanel.add(field, 0);
 
@@ -310,12 +296,11 @@ public class GameHanoi extends JFrame {
     private void moveFromDestinationToPivot(){
         if (tPanel.getComponentCount() > 0) {
             try {
-                // Si la torre pivote está vacía, no haremos la comparación.
                 if (!towerManager.getTowerB().empty() && towerManager.getTowerB().peek().compareTo(towerManager.getTowerC().peek()) <= 0) {
-                    return; // Si la comparación es inválida, termina el método aquí.
+                    return;
                 }
             } catch (EmptyStackException e) {
-                // No haremos nada aquí, porque si la torre pivote está vacía, queremos continuar con el movimiento.
+
             }
             Component component = tPanel.getComponent(0);
             if (component instanceof JTextField) {
@@ -325,7 +310,6 @@ public class GameHanoi extends JFrame {
 
                 JPanel initialFieldPanel = (JPanel) pivotTower.getComponent(0);
 
-                // Mueve el JTextField de fieldPanel2 a initialFieldPanel
                 tPanel.remove(field);
                 initialFieldPanel.add(field, 0);
 
@@ -362,13 +346,12 @@ public class GameHanoi extends JFrame {
     }
     public boolean checkContinue() {
         step +=1;
-        int opcion = JOptionPane.showConfirmDialog(null, "PASO #" + step + "\n¿Desea continuar?", "Pregunta", JOptionPane.YES_NO_OPTION);
+        int opcion = JOptionPane.showConfirmDialog(null, "PASO N.-" + step + "\n Vas avanzar?", "Pregunta", JOptionPane.YES_NO_OPTION);
         return opcion == JOptionPane.YES_OPTION;
     }
     private void recordMove(String move){
         StringBuilder invertido = new StringBuilder(move);
         if(towerManager.getMovesStack().isEmpty() || (!towerManager.getMovesStack().peek().equals(move) && !towerManager.getMovesStack().peek().equals(invertido.reverse().toString()))){
-            // Agrega el movimiento a la pila
             towerManager.getMovesStack().push(move);
             isCancelled = true;
         }else{
@@ -380,7 +363,7 @@ public class GameHanoi extends JFrame {
         boolean paso = true;
 
         if (towerManager.getMovesStack().isEmpty()) {
-            return; // No hay movimientos para deshacer, salir del método
+            return;
         }
 
         while (!towerManager.getMovesStack().isEmpty() && paso) {
@@ -391,14 +374,14 @@ public class GameHanoi extends JFrame {
             String move = towerManager.getMovesStack().pop();
             if ("IP".equals(move)) {
                 moveFromPivotToInitial();
-            } else if ("PD".equals(move)) {
-                moveFromDestinationToPivot();
-            } else if ("ID".equals(move)) {
-                moveFromDestinationToInitial();
             }else if ("PI".equals(move)) {
                 moveFromInitialToPivot();
+            }else if ("ID".equals(move)) {
+                moveFromDestinationToInitial();
             }else if ("DI".equals(move)) {
                 moveFromInitialToDestination();
+            }else if ("PD".equals(move)) {
+                moveFromDestinationToPivot();
             }else{
                 moveFromPivotToDestination();
             }
